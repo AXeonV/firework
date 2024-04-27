@@ -116,7 +116,7 @@ const store = {
 	state: {
 		// will be unpaused in init()
 		paused: true,
-		soundEnabled: false,
+		soundEnabled: true, /* X's modify: from false to true */
 		menuOpen: false,
 		openHelpTopic: null,
 		fullscreen: isFullscreen(),
@@ -130,7 +130,7 @@ const store = {
 				: IS_HEADER 
 					? '1.2' // Profile header default (doesn't need to be an int)
 					: '2', // Mobile default
-			autoLaunch: true,
+			autoLaunch: false, /* X's modify: from true to false */
 			finale: false,
 			skyLighting: SKY_LIGHT_NORMAL + '',
 			hideControls: IS_HEADER,
@@ -1406,7 +1406,7 @@ function render(speed) {
 	trailsCtx.lineWidth = Star.drawWidth;
 	trailsCtx.lineCap = isLowQuality ? 'square' : 'round';
 	mainCtx.strokeStyle = '#fff';
-  mainCtx.lineWidth = 1;
+	mainCtx.lineWidth = 1;
 	mainCtx.beginPath();
 	COLOR_CODES.forEach(color => {
 		const stars = Star.active[color];
@@ -1689,17 +1689,21 @@ class Shell {
 		const width = stageW;
 		const height = stageH;
 		// Distance from sides of screen to keep shells.
-		const hpad = 60;
+		// const hpad = 60;
+		const hpad = 0; /* X's modify: Distance in my opinion is not neccesary */
 		// Distance from top of screen to keep shell bursts.
-		const vpad = 50;
+		// const vpad = 50;
+		const vpad = 0; /* X's modify: Distance in my opinion is not neccesary */
 		// Minimum burst height, as a percentage of stage height
-		const minHeightPercent = 0.45;
+		// const minHeightPercent = 0.45;
+		const minHeightPercent = 0; /* X's modify: Minimums in my opinion is not neccesary */
 		// Minimum burst height in px
 		const minHeight = height - height * minHeightPercent;
 		
 		const launchX = position * (width - hpad * 2) + hpad;
 		const launchY = height;
 		const burstY = minHeight - (launchHeight * (minHeight - vpad));
+		/* const burstY = height * (1 - launchHeight); */
 		
 		const launchDistance = launchY - burstY;
 		// Using a custom power curve to approximate Vi needed to reach launchDistance under gravity and air drag.
