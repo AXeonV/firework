@@ -1121,8 +1121,8 @@ let isUpdatingSpeed = false;
 
 function handlePointerStart(event) {
 	activePointerCount++;
+
 	const btnSize = 50;
-	
 	if (event.y < btnSize) {
 		if (event.x < btnSize) {
 			togglePause();
@@ -1158,6 +1158,9 @@ function handlePointerMove(event) {
 	
 	if (isUpdatingSpeed) {
 		updateSpeedFromEvent(event);
+	}
+	if (activePointerCount && event.onCanvas) {
+		launchShellFromConfig(event);
 	}
 }
 
